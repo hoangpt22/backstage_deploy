@@ -6,7 +6,7 @@ metadata:
   title: Deploy simple webapps
   description: An example template for the scaffolder that deploy a simple webapps
 spec:
-  owner: user:guest
+  owner: Admin:hoangpt5
   type: service
 
   # These parameters are used to generate the input form in the frontend, and are
@@ -43,7 +43,7 @@ spec:
       name: Fetch Base
       action: fetch:template
       input:
-        url: ./content
+        url: ./repo-content
         values:
           name: ${{ parameters.name }}
 
