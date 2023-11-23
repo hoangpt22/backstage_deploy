@@ -11,14 +11,20 @@ jobs:
   deploy-dev:
     strategy:
       matrix:
-        node-version: [14.x]
+        node-version: [18.x]
 
     env:
       AWS_PROFILE: default
 
     runs-on: ubuntu-latest
     name: Deploy
-    run : |
-      npm i -g serverless
-      sls config credentials --provider aws --key ${{ secrets.AWS_ACCESS_KEY_ID }} --secret ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      sls deploy
+    steps: 
+    - uses: actions/checkout@v2
+    - name: Use Node.js 18.x
+      uses: actions/setup-node@v1
+      with:
+        node-version: 18.x
+    - run : |
+        npm i -g serverless
+        sls config credentials --provider aws --key ${{ secrets.AWS_ACCESS_KEY_ID }} --secret ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        sls deploy
