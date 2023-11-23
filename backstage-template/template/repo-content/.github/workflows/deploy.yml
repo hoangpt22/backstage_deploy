@@ -1,0 +1,24 @@
+---
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch: {}
+
+jobs:
+  deploy-dev:
+    strategy:
+      matrix:
+        node-version: [14.x]
+
+    env:
+      AWS_PROFILE: default
+
+    runs-on: ubuntu-latest
+    name: Deploy
+    run : |
+      npm i -g serverless
+      sls config credentials --provider aws --key ${{ secrets.AWS_ACCESS_KEY_ID }} --secret ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      sls deploy
