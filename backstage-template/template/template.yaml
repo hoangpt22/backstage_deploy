@@ -44,6 +44,8 @@ spec:
       action: fetch:template
       input:
         url: ./repo-content
+        copyWithoutRender:
+          - .github/workflows/*
         values:
           name: ${{ parameters.name }}
 
